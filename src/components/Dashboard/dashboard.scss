@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    overflow: hidden;
 
     &_wrapper{
       display: flex;
@@ -15,7 +14,6 @@
         left: 240px !important;
         width: calc(100vw - 240px);
         height: calc(100% - 6.25rem);
-        overflow: hidden; // prevent outer scroll
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
