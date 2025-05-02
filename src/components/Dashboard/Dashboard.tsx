@@ -21,46 +21,6 @@ export default function Dashboard(props: DashboardProps) {
         setMobileOpen((prevState) => !prevState);
     };
 
-    const scrollRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const scrollContainer = scrollRef.current;
-        const iframe = iframeRef.current;
-    
-        const handleTouchStart = (e: TouchEvent) => {
-          if (iframe && iframe.contains(e.target as Node)) {
-            // If touch is on the iframe, allow interaction
-            iframe.style.pointerEvents = "auto";
-          } else if(iframe) {
-            // Otherwise, allow parent container to scroll
-            iframe.style.pointerEvents = "none";  // Disable iframe interaction for scrolling
-          }
-        };
-    
-        const handleTouchMove = (e: TouchEvent) => {
-          // If iframe pointer events are disabled, stop event propagation to allow parent scrolling
-          if (iframe && iframe.style.pointerEvents === "none") {
-            e.stopPropagation();
-          }
-        };
-    
-        // Add event listeners for touch events on the parent container
-        if (scrollContainer) {
-          scrollContainer.addEventListener("touchstart", handleTouchStart, { passive: false });
-          scrollContainer.addEventListener("touchmove", handleTouchMove, { passive: false });
-        }
-    
-        return () => {
-          // Cleanup event listeners
-          if (scrollContainer) {
-            scrollContainer.removeEventListener("touchstart", handleTouchStart);
-            scrollContainer.removeEventListener("touchmove", handleTouchMove);
-          }
-        };
-      }, []);
-    
-
-
     return (
         <div className='dashboard'>
             <AppToolbar handleDrawerToggle={handleDrawerToggle} />
@@ -72,7 +32,7 @@ export default function Dashboard(props: DashboardProps) {
                     isTablet={isTablet} />
                 }
                 <div className='dashboard_item'>
-                    <div className="dashboard_item__scroll" ref={scrollRef}  tabIndex={0} >
+                    <div className="dashboard_item__scroll" tabIndex={0} >
                     <iframe className='dashboard_item_visual'
                         title="Data Visualisation"   
                         ref={iframeRef}
