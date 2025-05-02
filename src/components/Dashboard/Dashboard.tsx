@@ -16,11 +16,49 @@ export default function Dashboard(props: DashboardProps) {
     const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'md'));  // Between 600px and 900px (tablet)
 
     const drawerOpen = mobileOpen || (!isMobile && !isTablet)
+    const iframeRef = useRef<HTMLIFrameElement>(null);
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const scrollContainer = scrollRef.current;
+        const iframe = iframeRef.current;
+    
+        const handleTouchStart = (e: TouchEvent) => {
+          if (iframe && iframe.contains(e.target as Node)) {
+            // If touch is on the iframe, allow interaction
+            iframe.style.pointerEvents = "auto";
+          } else if(iframe) {
+            // Otherwise, allow parent container to scroll
+            iframe.style.pointerEvents = "none";  // Disable iframe interaction for scrolling
+          }
+        };
+    
+        const handleTouchMove = (e: TouchEvent) => {
+          // If iframe pointer events are disabled, stop event propagation to allow parent scrolling
+          if (iframe && iframe.style.pointerEvents === "none") {
+            e.stopPropagation();
+          }
+        };
+    
+        // Add event listeners for touch events on the parent container
+        if (scrollContainer) {
+          scrollContainer.addEventListener("touchstart", handleTouchStart, { passive: false });
+          scrollContainer.addEventListener("touchmove", handleTouchMove, { passive: false });
+        }
+    
+        return () => {
+          // Cleanup event listeners
+          if (scrollContainer) {
+            scrollContainer.removeEventListener("touchstart", handleTouchStart);
+            scrollContainer.removeEventListener("touchmove", handleTouchMove);
+          }
+        };
+      }, []);
+    
 
 
     return (
@@ -37,6 +75,7 @@ export default function Dashboard(props: DashboardProps) {
                     <div className="dashboard_item__scroll" ref={scrollRef}  tabIndex={0} >
                     <iframe className='dashboard_item_visual'
                         title="Data Visualisation"   
+                        ref={iframeRef}
                         sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                         allow="fullscreen"
                         src="https://public.tableau.com/views/MobileView_17461501570240/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link?:embed=y&amp;:showVizHome=no&amp;
