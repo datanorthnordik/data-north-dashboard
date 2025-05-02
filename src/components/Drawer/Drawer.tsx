@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
+import "./drawer.scss"
 
 
 interface DrawerProps {
@@ -30,23 +31,13 @@ const DashboardDrawer = (props: DrawerProps) => {
     const drawerOpen = mobileOpen || (!isMobile && !isTablet)
     return (
         <nav className="drawer">
-            <Drawer
+            <Drawer className="drawer_component" 
                 variant="temporary"
                 open={drawerOpen}
                 onClose={handleDrawerToggle}
-                style={{position: 'relative'}}
                 hideBackdrop={!drawerOpen || (!isMobile && !isTablet)}
                 ModalProps={{
                     keepMounted: true,
-                }}
-                sx={{
-                    '& .MuiDrawer-paper': {
-                        boxSizing: 'border-box',
-                        width: drawerWidth,
-                        top: "6.25rem",
-                        backgroundColor: "#004B9C",
-                        height: 'calc(100% - 6.25rem) !important'
-                    },
                 }}
             >
                 <div onClick={handleDrawerToggle} style={{ textAlign: 'center' }}>

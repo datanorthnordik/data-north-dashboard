@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    overflow: hidden;
 
     &_wrapper{
       display: flex;
@@ -9,21 +10,37 @@
     }
 
     &_item{
+        position: fixed !important;
+        top: 6.25rem !important;
+        left: 240px !important;
+        width: calc(100vw - 240px);
+        height: calc(100% - 6.25rem);
+        overflow: hidden; // prevent outer scroll
+        display: flex;
+        flex-direction: column;
         box-sizing: border-box;
-        top: 6.25rem !important; 
-        left: 240px !important; 
-        position: fixed !important; 
-        overflow-y:auto !important;
-        height: calc(100% - 6.25rem) !important;
-        @media screen and (max-width:900px) {
-            left: 0 !important; 
+        
+      
+        @media screen and (max-width: 900px) {
+          left: 0 !important;
+          width: 100vw;
+        }
+      
+        &__scroll {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: auto;
+            overscroll-behavior: contain;
+            transform: translate3d(0, 0, 0); /* Force GPU acceleration */
         }
 
         &_visual{
+            pointer-events: none; 
             width: calc(100vw - 240px) !important;
             height: 900px !important;
             border: none !important;
-            overflow-y:auto !important;
+            overflow-y:scroll !important;
             @media screen and (max-width:900px) {
                 width: 100vw !important;
             }

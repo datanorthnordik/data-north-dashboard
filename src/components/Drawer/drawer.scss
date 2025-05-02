@@ -1,0 +1,12 @@
+.drawer {
+    &_component {
+        position: relative !important;
+        & .MuiDrawer-paper {
+            box-sizing: border-box !important;
+            width: 240px !important;
+            top: 6.25rem !important;
+            background-color: #004B9C !important;
+            height: calc(100% - 6.25rem) !important
+        }
+    }
+}
