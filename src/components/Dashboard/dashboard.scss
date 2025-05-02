@@ -1,0 +1,30 @@
+.dashboard{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &_wrapper{
+      display: flex;
+    }
+
+    &_item{
+        box-sizing: border-box;
+        top: 6.25rem !important; 
+        left: 240px !important; 
+        position: fixed !important; 
+        overflow-y:auto !important;
+        height: calc(100% - 6.25rem) !important;
+        @media screen and (max-width:900px) {
+            left: 0 !important; 
+        }
+
+        &_visual{
+            width: calc(100vw - 240px) !important;
+            height: 900px !important;
+            border: none !important;
+            @media screen and (max-width:900px) {
+                width: 100vw !important;
+            }
+        }
+    }
+}

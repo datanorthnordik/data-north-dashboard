@@ -1,0 +1,30 @@
+@import "../../scss/variables.scss";
+
+.apptoolbar {
+    background-color: $color_white !important;
+    min-height: 6.25rem !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.toolbar {
+    &_icon{
+        color: $primary_color !important;
+    }
+
+    &_brand{
+        max-width: 25%;
+        @media screen and (max-width:900px) {
+            max-width: 40%;
+        }
+
+        @media screen and (max-width:600px) {
+            max-width: 60%;
+        }
+
+        max-height: 4rem
+    }
+}
+
+
+
