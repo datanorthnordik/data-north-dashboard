@@ -36,6 +36,9 @@
         }
 
         &_visual{
+            position: relative;
+            overflow: hidden;
+            display: block;
             width: calc(100vw - 240px) !important;
             height: 900px !important;
             border: none !important;
