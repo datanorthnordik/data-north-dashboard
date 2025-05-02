@@ -37,7 +37,7 @@ export default function Dashboard(props: DashboardProps) {
                     <div className="dashboard_item__scroll" ref={scrollRef}  tabIndex={0} >
                     <iframe className='dashboard_item_visual'
                         title="Data Visualisation"   
-                        scrolling="yes"  // Allow iframe to scroll independently
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                         allow="fullscreen"
                         src="https://public.tableau.com/views/MobileView_17461501570240/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link?:embed=y&amp;:showVizHome=no&amp;
                         :host_url=https%3A%2F%2Fpublic.tableau.com%2F&amp;:embed_code_version=3&amp;:tabs=no&amp;:toolbar=yes&amp;

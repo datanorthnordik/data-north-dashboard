@@ -33,10 +33,13 @@
             touch-action: auto;
             overscroll-behavior: contain;
             transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+            @media screen and (max-width: 900px) {
+                padding-right: .5rem;
+                padding-left: .5rem;
+            }
         }
 
         &_visual{
-            pointer-events: none; 
             width: calc(100vw - 240px) !important;
             height: 900px !important;
             border: none !important;
