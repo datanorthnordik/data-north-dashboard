@@ -1,3 +1,5 @@
+@import "../../scss/variables.scss";
+
 .drawer {
     &_component {
         position: relative !important;
@@ -7,6 +9,20 @@
             top: 6.25rem !important;
             background-color: #004B9C !important;
             height: calc(100% - 6.25rem) !important
+        }
+    }
+
+    &_list{
+        &_button{
+            text-align: start !important;
+            color: white !important;
+            &:hover{
+                background-color: $secondary_color !important;
+            }
+        }
+
+        &_selected{
+            background-color: $secondary_color !important;
         }
     }
 }

@@ -4,9 +4,6 @@ import Drawer from '@mui/material/Drawer';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import Diversity3Icon from '@mui/icons-material/Diversity3';
 import "./drawer.scss"
 
 
@@ -15,19 +12,26 @@ interface DrawerProps {
     isMobile: boolean
     isTablet: boolean
     mobileOpen: boolean
+    navItems: any[]
+    selectedCategory: any
+    setSelectedCategory: (category:any)=> void
 }
 
 const drawerWidth = 240;
 
 
-const navItems = [
-    { title: 'Demographics', icon: <Diversity3Icon /> },
-    { title: 'Health', icon: <HealthAndSafetyIcon /> },
-    { title: 'Economics', icon: <MonetizationOnIcon /> }
-];
+
 
 const DashboardDrawer = (props: DrawerProps) => {
-    const { handleDrawerToggle, isMobile, isTablet , mobileOpen } = props
+    const { 
+        handleDrawerToggle, 
+        isMobile, 
+        isTablet , 
+        mobileOpen, 
+        navItems, 
+        selectedCategory, 
+        setSelectedCategory 
+    } = props
     const drawerOpen = mobileOpen || (!isMobile && !isTablet)
     return (
         <nav className="drawer">
@@ -41,14 +45,13 @@ const DashboardDrawer = (props: DrawerProps) => {
                 }}
             >
                 <div onClick={handleDrawerToggle} style={{ textAlign: 'center' }}>
-                    <List style={{ paddingTop: 0 }}>
+                    <List className="drawer_list" style={{ paddingTop: 0 }}>
                         {navItems.map((item) => (
                             <ListItem key={item.title} disablePadding>
-                                <ListItemButton sx={{
-                                    textAlign: 'start', color: 'white', '&:hover': {
-                                        background: "#A61D33"
-                                    }
-                                }}>
+                                <ListItemButton 
+                                    onClick={()=> setSelectedCategory(item)}
+                                    className={
+                                        `drawer_list_button ${selectedCategory.title == item.title ? 'drawer_list_selected': '' }`} >
                                     {item.icon}
                                     <ListItemText primary={item.title} style={{ marginLeft: "10px" }} />
                                 </ListItemButton>

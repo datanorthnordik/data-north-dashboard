@@ -37,7 +37,6 @@
 
         &_visual{
             width: calc(100vw - 240px) !important;
-            height: 900px !important;
             border: none !important;
             overflow-y:scroll !important;
             @media screen and (max-width:900px) {
