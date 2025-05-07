@@ -10,14 +10,11 @@ import "./dashboard.scss"
 import { useEffect, useRef } from 'react';
 import { getDashBoard } from '../../services/dashboard';
 import DashBoardItem from '../DashboardItem/DashBoardItem';
-
-
+import { useNavigate } from 'react-router-dom';
 
 interface DashboardProps {
 
 }
-
-
 
 export default function Dashboard(props: DashboardProps) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -29,6 +26,7 @@ export default function Dashboard(props: DashboardProps) {
         { title: 'Health', icon: <HealthAndSafetyIcon />, dashboards: [] },
         { title: 'Economics', icon: <MonetizationOnIcon />, dashboards: [] }
     ])
+    const navigate = useNavigate()
     const drawerOpen = mobileOpen || (!isMobile && !isTablet)
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
@@ -64,7 +62,7 @@ export default function Dashboard(props: DashboardProps) {
 
     return (
         <div className='dashboard'>
-            <AppToolbar handleDrawerToggle={handleDrawerToggle} />
+            <AppToolbar hideIcon={false} handleDrawerToggle={handleDrawerToggle} />
             <div className='dashboard_wrapper'>
                 {drawerOpen && <DashboardDrawer
                     handleDrawerToggle={handleDrawerToggle}
@@ -81,9 +79,10 @@ export default function Dashboard(props: DashboardProps) {
                     <DashBoardItem board={board} />
                 ))}
             </div>
-            <div className='dashboard_chat'>
-                <ChatIcon sx={{fontSize: "50px"}} className='dashboard_chat_icon'/>
-                
+            <div className='dashboard_chat' title="Ask analyst" onClick={()=>{navigate("/chat")}}>
+                <ChatIcon 
+                    sx={{fontSize: "50px", md: {fontSize: "25px"}}} 
+                    className='dashboard_chat_icon'/>
             </div>
         </div>
     );

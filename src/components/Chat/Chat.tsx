@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { triggerGemini } from "../../services/dashboard"
 import { Backdrop, CircularProgress } from "@mui/material"
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import "./chat.scss"
 
 
@@ -54,8 +55,12 @@ const Chat = (props: ChatProps) => {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>}
-            <AppToolbar />
+            <AppToolbar hideIcon={true} />
             <div className="chat" style={{ position: 'relative' }}>
+                <div className="chat_to_dashboard" onClick={()=>navigate("/")}>
+                    <KeyboardBackspaceRoundedIcon/>
+                    dashboard
+                </div>
                 <div className="chat_wrapper">
                     {qnsList.map(qns => (
                         <div className="chat_item">

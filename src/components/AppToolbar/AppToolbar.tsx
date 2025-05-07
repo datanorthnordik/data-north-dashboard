@@ -7,14 +7,15 @@ import "./apptoolbar.scss"
 
 interface AppToolbarProps {
     handleDrawerToggle?: () => void
+    hideIcon: boolean
 }
 
 const AppToolbar = (props: AppToolbarProps) => {
-    const { handleDrawerToggle } = props
+    const { handleDrawerToggle, hideIcon } = props
     return (
         <AppBar className="apptoolbar" component="nav">
             <Toolbar className='toolbar'>
-                <IconButton
+                {hideIcon && <IconButton
                     className="toolbar_icon"
                     aria-label="open drawer"
                     edge="start"
@@ -22,7 +23,7 @@ const AppToolbar = (props: AppToolbarProps) => {
                     sx={{ mr: 2, display: { md: 'none' } }}
                 >
                     <MenuIcon />
-                </IconButton>
+                </IconButton>}
 
                 <img className="toolbar_brand" fetchPriority="high" width="1280" height="320"
                     src="https://nordikinstitute.com/wp-content/uploads/2020/04/NordikFinalLogo-1280x320.png" alt="Nordik Institute"
@@ -32,7 +33,14 @@ const AppToolbar = (props: AppToolbarProps) => {
                     https://nordikinstitute.com/wp-content/uploads/2020/04/NordikFinalLogo-1536x384.png 1536w, 
                     https://nordikinstitute.com/wp-content/uploads/2020/04/NordikFinalLogo.png 1656w"
                     sizes="(max-width: 1280px) 100vw, 1280px"></img>
+                
+                <h1 className="toolbar_heading">
+                    DATA NORTH
+                </h1>
 
+                <img className="toolbar_brand_secondary" fetchPriority="high" width="1280" height="320"
+                    src="decide_lab.jpg"
+                    ></img>
             </Toolbar>
         </AppBar>
     )

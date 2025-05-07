@@ -24,6 +24,20 @@
        
     }
 
+    &_to_dashboard{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $secondary_color;
+        align-self: flex-start;
+        padding: 5px 15px;
+        margin: 10px;
+        border-radius: 10px;
+        color: $secondary-color;
+        cursor: pointer;
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    }
+
     &_item{
         width:100%;
         display: flex;
@@ -62,7 +76,7 @@
         & input{
             width: 100%;
             height: 100%;
-            border-radius: 50px;
+            border-radius: 10px;
             border: 1px sold rgb(230, 226, 226);
             font-size: 1.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

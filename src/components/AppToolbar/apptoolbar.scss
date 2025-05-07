@@ -13,16 +13,49 @@
     }
 
     &_brand{
-        max-width: 25%;
+        max-width: 12%;
         @media screen and (max-width:900px) {
-            max-width: 40%;
+            max-width: 30%;
         }
 
         @media screen and (max-width:600px) {
-            max-width: 60%;
+            max-width: 25%;
+            max-height: 2rem;
         }
 
-        max-height: 4rem
+        max-height: 3rem;
+
+        &_secondary{
+            max-width: 12%;
+            max-height: 3rem;
+
+            @media screen and (max-width:900px) {
+                max-width: 30%;
+            }
+    
+            @media screen and (max-width:600px) {
+                max-width: 25%;
+                max-height: 2rem;
+            }
+        }
+    }
+
+    &_heading{
+        flex: 1;
+        color: $secondary_color;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media screen and (max-width:900px) {
+            font-size: 1.5rem;
+        }
+
+        @media screen and (max-width:600px) {
+            font-size: 1.2rem;
+            width:100%;
+        }
     }
 }
 

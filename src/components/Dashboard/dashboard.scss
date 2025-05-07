@@ -24,6 +24,10 @@
       align-items: center;
       justify-content: center;
 
+      @media screen and (max-width: 900px) {
+        height: px;
+        width: 100px;
+      }
 
       &_icon{
         color: $secondary_color;
