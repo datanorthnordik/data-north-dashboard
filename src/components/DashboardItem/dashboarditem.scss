@@ -1,0 +1,41 @@
+.dashboard{
+    &_item{
+        position: fixed !important;
+        top: 6.25rem !important;
+        left: 240px !important;
+        width: calc(100vw - 240px);
+        height: calc(100% - 6.25rem);
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        justify-content: center;
+        
+      
+        @media screen and (max-width: 900px) {
+          left: 0 !important;
+          width: 100vw;
+        }
+      
+        &__scroll {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: auto;
+            overscroll-behavior: contain;
+            transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+        }
+    
+        &_visual{
+            width: calc(100vw - 240px) !important;
+            border: none !important;
+            overflow-y:scroll !important;
+            @media screen and (max-width:900px) {
+                width: 95vw !important;
+            }
+            z-index: 0;
+        }
+    }
+}

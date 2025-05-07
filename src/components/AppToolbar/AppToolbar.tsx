@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import "./apptoolbar.scss"
 
 interface AppToolbarProps {
-    handleDrawerToggle: () => void
+    handleDrawerToggle?: () => void
 }
 
 const AppToolbar = (props: AppToolbarProps) => {

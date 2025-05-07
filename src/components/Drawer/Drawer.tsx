@@ -44,8 +44,8 @@ const DashboardDrawer = (props: DrawerProps) => {
                     keepMounted: true,
                 }}
             >
-                <div onClick={handleDrawerToggle} style={{ textAlign: 'center' }}>
-                    <List className="drawer_list" style={{ paddingTop: 0 }}>
+                <div className="drawer_list_wrapper" onClick={handleDrawerToggle}>
+                    <List className="drawer_list">
                         {navItems.map((item) => (
                             <ListItem key={item.title} disablePadding>
                                 <ListItemButton 
@@ -53,7 +53,7 @@ const DashboardDrawer = (props: DrawerProps) => {
                                     className={
                                         `drawer_list_button ${selectedCategory.title == item.title ? 'drawer_list_selected': '' }`} >
                                     {item.icon}
-                                    <ListItemText primary={item.title} style={{ marginLeft: "10px" }} />
+                                    <ListItemText className="drawer_list_text" primary={item.title}/>
                                 </ListItemButton>
                             </ListItem>
                         ))}

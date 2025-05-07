@@ -8,3 +8,14 @@ export const getDashBoard = async ()=>{
         return error
     }
 }
+
+export const triggerGemini = async (question: string)=>{
+    try{
+        const result = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/dashboard/ask`, {
+            question
+        })
+        return result.data
+    }catch(error){
+        return error
+    }
+}
