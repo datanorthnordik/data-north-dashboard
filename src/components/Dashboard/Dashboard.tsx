@@ -74,15 +74,18 @@ export default function Dashboard(props: DashboardProps) {
                     setSelectedCategory={setSelectedCategory}
                 />
                 }
-
-                {selectedCategory.dashboards.map((board: any) => (
-                    <DashBoardItem board={board} />
-                ))}
+                <div className='dashboard_item'>
+                    <div className="dashboard_item__scroll" tabIndex={0} >
+                        {selectedCategory.dashboards.map((board: any) => (
+                            <DashBoardItem board={board} />
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div className='dashboard_chat' title="Ask analyst" onClick={()=>{navigate("/chat")}}>
-                <ChatIcon 
-                    sx={{fontSize: "50px", md: {fontSize: "25px"}}} 
-                    className='dashboard_chat_icon'/>
+            <div className='dashboard_chat' title="Ask analyst" onClick={() => { navigate("/chat") }}>
+                <ChatIcon
+                    sx={{ fontSize: "50px", md: { fontSize: "25px" } }}
+                    className='dashboard_chat_icon' />
             </div>
         </div>
     );
