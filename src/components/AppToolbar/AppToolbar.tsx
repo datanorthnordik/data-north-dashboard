@@ -15,7 +15,7 @@ const AppToolbar = (props: AppToolbarProps) => {
     return (
         <AppBar className="apptoolbar" component="nav">
             <Toolbar className='toolbar'>
-                <IconButton
+                {!hideIcon && <IconButton
                     className="toolbar_icon"
                     aria-label="open drawer"
                     edge="start"
@@ -23,7 +23,7 @@ const AppToolbar = (props: AppToolbarProps) => {
                     sx={{ mr: 2}}
                 >
                     <MenuIcon />
-                </IconButton>
+                </IconButton>}
 
                 <img className="toolbar_brand" fetchPriority="high" width="1280" height="320"
                     src="https://nordikinstitute.com/wp-content/uploads/2020/04/NordikFinalLogo-1280x320.png" alt="Nordik Institute"
