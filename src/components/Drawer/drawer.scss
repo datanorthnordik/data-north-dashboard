@@ -3,26 +3,29 @@
 .drawer {
     &_component {
         position: relative !important;
+
         & .MuiDrawer-paper {
             box-sizing: border-box !important;
             width: 240px !important;
-            top: 6.25rem !important;
+            top: 4rem !important;
             background-color: #004B9C !important;
-            height: calc(100% - 6.25rem) !important
+            height: calc(100% - 4rem) !important
         }
     }
 
-    &_list{
+    &_list {
         padding-top: 0 !important;
-        &_button{
+
+        &_button {
             text-align: start !important;
             color: white !important;
-            &:hover{
+
+            &:hover {
                 background-color: $secondary_color !important;
             }
         }
 
-        &_selected{
+        &_selected {
             background-color: $secondary_color !important;
         }
 
@@ -30,8 +33,37 @@
             text-align: center;
         }
 
-        &_text{
+        &_text {
             margin-left: 10px
+        }
+    }
+
+    &_subitem {
+        width: 100% !important;
+
+        &_list {
+            padding-top: 0 !important;
+
+            &_button {
+                text-align: start !important;
+                color: white !important;
+                padding-left: 40px !important;
+                &:hover {
+                    background-color: $secondary_color !important;
+                }
+            }
+
+            &_selected {
+                background-color: $secondary_color !important;
+            }
+
+            &_wrapper {
+                text-align: center;
+            }
+
+            &_text {
+                margin-left: 10px
+            }
         }
     }
 }

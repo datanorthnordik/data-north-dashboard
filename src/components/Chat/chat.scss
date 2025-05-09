@@ -5,8 +5,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 6.25rem;
-    height: calc(100vh - 6.25rem - 100px);
+    margin-top: 4rem;
+    height: calc(100vh - 4rem - 100px);
     overflow: hidden;
     
     &_wrapper{
@@ -59,6 +59,7 @@
         &_answer{
             font-size: 1rem;
             margin-bottom: 10px;
+            scroll-margin-top: 0px;
         }
     }
 

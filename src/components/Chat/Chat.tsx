@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import AppToolbar from "../AppToolbar/AppToolbar"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -19,6 +19,8 @@ const Chat = (props: ChatProps) => {
     const [qnsList, setQnsList] = useState<any[]>([])
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false)
+    const lastQuestionRef = useRef<any>(null);
+    const containerRef = useRef<any>(null);
 
 
 
@@ -41,6 +43,19 @@ const Chat = (props: ChatProps) => {
             setQnsList(list)
             setQuestion('')
             setIsLoading(false)
+            if (lastQuestionRef.current) {
+                setTimeout(() => {
+                    const containerTop = containerRef.current.getBoundingClientRect().top;
+                    const itemTop = lastQuestionRef.current.getBoundingClientRect().top;
+                    const scrollOffset = itemTop - containerTop;
+
+                    containerRef.current.scrollTo({
+                        top: scrollOffset,
+                        behavior: 'smooth',
+                    });
+                    lastQuestionRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 0);
+            }
         } catch (error) {
             setIsLoading(false)
             console.log(error)
@@ -57,14 +72,16 @@ const Chat = (props: ChatProps) => {
             </Backdrop>}
             <AppToolbar hideIcon={true} />
             <div className="chat" style={{ position: 'relative' }}>
-                <div className="chat_to_dashboard" onClick={()=>navigate("/")}>
-                    <KeyboardBackspaceRoundedIcon/>
+                <div className="chat_to_dashboard" onClick={() => navigate("/")}>
+                    <KeyboardBackspaceRoundedIcon />
                     dashboard
                 </div>
-                <div className="chat_wrapper">
-                    {qnsList.map(qns => (
-                        <div className="chat_item">
-                            <div className="chat_item_question">{qns.question}</div>
+                <div className="chat_wrapper" ref={containerRef}>
+                    {qnsList.map((qns, index) => (
+                        <div className="chat_item" ref={index === qnsList.length - 1 ? lastQuestionRef : null}>
+                            <div className="chat_item_question">
+                                {qns.question}
+                            </div>
                             <div className="chat_item_answer">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}

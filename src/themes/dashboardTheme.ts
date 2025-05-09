@@ -6,7 +6,7 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          minHeight: '6.25rem',
+          minHeight: '4rem',
           display:'flex',
           justifyContent:'center'
         },
@@ -15,7 +15,7 @@ const theme = createTheme({
     MuiToolbar: {
         styleOverrides: {
           root: {
-            height: '6.25rem',
+            height: '4rem',
             minHeight: 'auto !important',
             padding: 0,
           },
@@ -40,7 +40,7 @@ const theme = createTheme({
     MuiDrawer: {
         styleOverrides: {
           paper: {
-            height: 'calc(100% - 6.25rem)',
+            height: 'calc(100% - 4rem)',
           },
         },
       },

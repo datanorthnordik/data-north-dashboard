@@ -1,7 +1,7 @@
 .dashboard{
     &_item{
         &_visual{
-            width: calc(100vw - 240px) !important;
+            width: 100vw !important;
             border: none !important;
             overflow-y:scroll !important;
             @media screen and (max-width:900px) {

@@ -16,34 +16,66 @@ interface DashboardProps {
 
 }
 
+
+
 export default function Dashboard(props: DashboardProps) {
+
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));  // For screens less than 600px (mobile)
     const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'md'));  // Between 600px and 900px (tablet)
     const [dashboards, setDashBoards] = React.useState<any>([])
-    const [navItems, setNavItems] = useState([
-        { title: 'Demographics', icon: <Diversity3Icon />, dashboards: [] },
-        { title: 'Health', icon: <HealthAndSafetyIcon />, dashboards: [] },
-        { title: 'Economics', icon: <MonetizationOnIcon />, dashboards: [] }
-    ])
+    const [navItems, setNavItems] = useState([])
     const navigate = useNavigate()
     const drawerOpen = mobileOpen || (!isMobile && !isTablet)
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
+    const icons: any = {
+        'Demographics': <Diversity3Icon />,
+        'Health': <HealthAndSafetyIcon />,
+        'Economics': <MonetizationOnIcon />
+    }
 
+    const handleOpen = (event:any,index: number)=>{
+        event.stopPropagation();
+        const newNavItems:any = [...navItems]
+        newNavItems[index].open = !newNavItems[index].open
+        setNavItems(newNavItems)
+    }
 
-    const [selectedCategory, setSelectedCategory] = useState(navItems[0])
+    const [selectedCategory, setSelectedCategory] = useState<any>(navItems[0])
 
     useEffect(() => {
-        const newNavItems = [...navItems]
-        newNavItems.forEach((item) => {
-            const dashboardList = dashboards.filter((board: any) => board.title == item.title)
-            item.dashboards = dashboardList
-        })
-        setNavItems(newNavItems)
-        setSelectedCategory(newNavItems[0])
+        if (dashboards.length > 0) {
+            const navMap: any = {}
+            dashboards.forEach((item: any) => {
+                if (navMap[item.type]) {
+                    if (navMap[item.type][item.title]) {
+                        navMap[item.type][item.title].push(item)
+                    } else {
+                        navMap[item.type][item.title] = [item]
+                    }
+                } else {
+                    navMap[item.type] = { [item.title]: [item] }
+                }
+
+            })
+            const newNavItems: any = []
+            Object.entries(navMap).forEach(([title, dashboardList]: any) => {
+                const boardlist: any = []
+                Object.entries(dashboardList).forEach(([category, boards]) => {
+                    boardlist.push({ title: category, type: `${title}_${category}`, icon: icons[category], "dashboards": boards })
+                })
+                newNavItems.push({ title, "dashboards": boardlist, open: false })
+            });
+
+            console.log(newNavItems)
+            newNavItems[0]["open"] = true
+            setNavItems(newNavItems)
+            setSelectedCategory(newNavItems[0].dashboards[0])
+        }
+
     }, [dashboards])
 
 
@@ -65,6 +97,7 @@ export default function Dashboard(props: DashboardProps) {
             <AppToolbar hideIcon={false} handleDrawerToggle={handleDrawerToggle} />
             <div className='dashboard_wrapper'>
                 {drawerOpen && <DashboardDrawer
+                    handleOpen={handleOpen}
                     handleDrawerToggle={handleDrawerToggle}
                     isMobile={isMobile}
                     mobileOpen={mobileOpen}
@@ -76,16 +109,14 @@ export default function Dashboard(props: DashboardProps) {
                 }
                 <div className='dashboard_item'>
                     <div className="dashboard_item__scroll" tabIndex={0} >
-                        {selectedCategory.dashboards.map((board: any) => (
+                        {selectedCategory?.dashboards.map((board: any) => (
                             <DashBoardItem board={board} />
                         ))}
                     </div>
                 </div>
             </div>
             <div className='dashboard_chat' title="Ask analyst" onClick={() => { navigate("/chat") }}>
-                <ChatIcon
-                    sx={{ fontSize: "50px", md: { fontSize: "25px" } }}
-                    className='dashboard_chat_icon' />
+                <img src="NIA ICON.png" className='dashboard_chat_icon' />
             </div>
         </div>
     );
