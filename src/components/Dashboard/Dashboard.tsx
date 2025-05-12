@@ -11,6 +11,8 @@ import { useEffect, useRef } from 'react';
 import { getDashBoard } from '../../services/dashboard';
 import DashBoardItem from '../DashboardItem/DashBoardItem';
 import { useNavigate } from 'react-router-dom';
+import { BinocularsIcon } from '../../utils/Binocular';
+import MapIcon from  "@mui/icons-material/Map"
 
 interface DashboardProps {
 
@@ -34,7 +36,9 @@ export default function Dashboard(props: DashboardProps) {
     const icons: any = {
         'Demographics': <Diversity3Icon />,
         'Health': <HealthAndSafetyIcon />,
-        'Economics': <MonetizationOnIcon />
+        'Economics': <MonetizationOnIcon />,
+        'Soo View': <BinocularsIcon/>,
+        'Northern Ontario': <MapIcon/>
     }
 
     const handleOpen = (event:any,index: number)=>{
@@ -67,7 +71,7 @@ export default function Dashboard(props: DashboardProps) {
                 Object.entries(dashboardList).forEach(([category, boards]) => {
                     boardlist.push({ title: category, type: `${title}_${category}`, icon: icons[category], "dashboards": boards })
                 })
-                newNavItems.push({ title, "dashboards": boardlist, open: false })
+                newNavItems.push({ title, icon: icons[title], "dashboards": boardlist, open: false })
             });
 
             console.log(newNavItems)
