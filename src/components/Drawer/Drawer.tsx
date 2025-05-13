@@ -42,7 +42,12 @@ const DashboardDrawer = (props: DrawerProps) => {
 
     const handleDashboardSelection = (board:any)=>{
         setSelectedCategory(board)
-        navigate("")
+        navigate("/dashboard")
+    }
+
+    const handleOtherSelection = (item:any)=>{
+        setSelectedCategory(item)
+        item.onClick()
     }
     return (
         <nav className="drawer">
@@ -59,7 +64,7 @@ const DashboardDrawer = (props: DrawerProps) => {
                         {headerNavItems.map((headerItem: any) => (
                             headerItem.items.map((item: any) => (
                                 <ListItem style={{ flexWrap: 'wrap' }} key={item.title} disablePadding>
-                                    <ListItemButton onClick={()=>{item.onClick()}} className="drawer_list_button">
+                                    <ListItemButton onClick={()=>{handleOtherSelection(item)}} className={`drawer_list_button ${selectedCategory?.title == item?.title ? 'drawer_list_selected' : ''}`}>
                                         {item.icon}
                                         <ListItemText className="drawer_list_text" primary={item.title} />
                                     </ListItemButton>
@@ -98,7 +103,7 @@ const DashboardDrawer = (props: DrawerProps) => {
                         {footerNavItems.map((footerItem: any) => (
                             footerItem.items.map((item: any) => (
                                 <ListItem style={{ flexWrap: 'wrap' }} key={item.title} disablePadding>
-                                    <ListItemButton onClick={()=>{item.onClick()}} className="drawer_list_button">
+                                    <ListItemButton onClick={()=>{handleOtherSelection(item)}} className={`drawer_list_button ${selectedCategory?.title == item?.title ? 'drawer_list_selected' : ''}`}>
                                         {item.icon}
                                         <ListItemText className="drawer_list_text" primary={item.title} />
                                     </ListItemButton>

@@ -11,7 +11,6 @@ import DataAck from './components/DataAck/DataAck';
 import ContactUs from './components/ContactUs/ContactUs';
 import AboutUs from './components/AboutUs/AboutUs';
 import DashboardDrawer from './components/Drawer/Drawer';
-import { Theme, useMediaQuery } from '@mui/material';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
@@ -46,8 +45,8 @@ function App() {
     setNavItems(newNavItems)
   }
 
-  const headerNavItems = [
-    {"Heading": "", items:[{"title": "About Us", icon: <AccountCircleIcon/>, onClick: ()=>{navigate("/about-us")}}]}
+  const headerNavItems:any = [
+    {"Heading": "", items:[{"title": "About Us", icon: <AccountCircleIcon/>, onClick: ()=>{navigate("")}}]}
 ]
 
 const footerNavItems = [
@@ -55,7 +54,7 @@ const footerNavItems = [
     {"Heading": "", items:[{"title": "Contact Us", icon: <ContactMailIcon/>, onClick: ()=>{navigate("/contact-us")}}]}
 ]
 
-  const [selectedCategory, setSelectedCategory] = useState<any>(navItems[0])
+  const [selectedCategory, setSelectedCategory] = useState<any>(headerNavItems[0]["items"][0])
   
   const theme = createTheme();
 
@@ -86,7 +85,6 @@ const footerNavItems = [
         console.log(newNavItems)
         newNavItems[0]["open"] = true
         setNavItems(newNavItems)
-        setSelectedCategory(newNavItems[0].dashboards[0])
     }
 
   }, [dashboards])
@@ -121,8 +119,8 @@ const getDashBoardList = async () => {
           <Route path="/chat" element={<Chat handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/data-ack" element={<DataAck handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/contact-us" element={<ContactUs handleDrawerToggle={handleDrawerToggle} />} />
-          <Route path="/about-us" element={<AboutUs handleDrawerToggle={handleDrawerToggle} />} />
-          <Route path="" element={<Dashboard selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="" element={<AboutUs handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="/dashboard" element={<Dashboard selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
         </Routes>
     </ThemeProvider>
   );

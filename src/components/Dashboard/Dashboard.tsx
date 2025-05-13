@@ -28,7 +28,7 @@ export default function Dashboard(props: DashboardProps) {
                 
                 <div className='dashboard_item'>
                     <div className="dashboard_item__scroll" tabIndex={0} >
-                        {selectedCategory?.dashboards.map((board: any) => (
+                        {selectedCategory?.dashboards?.map((board: any) => (
                             <DashBoardItem board={board} />
                         ))}
                     </div>
