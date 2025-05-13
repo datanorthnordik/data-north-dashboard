@@ -5,9 +5,17 @@
     max-height: $header-height !important;
     display: flex !important;
     justify-content: center !important;
+
+    @media screen and (max-width: 600px) {
+        max-height: $header-mobile-height !important;
+    }
 }
 
 .toolbar {
+    
+    @media screen and (max-width:600px) {
+        flex-wrap: wrap !important;
+    }
     &_icon{
         color: $primary_color !important;
     }
@@ -21,6 +29,7 @@
         @media screen and (max-width:600px) {
             max-width: 25%;
             max-height: 2rem;
+            order:1
         }
 
         max-height: 3rem;
@@ -36,6 +45,8 @@
             @media screen and (max-width:600px) {
                 max-width: 25%;
                 max-height: 2rem;
+                order:1;
+                margin-left: auto;
             }
         }
     }
@@ -54,7 +65,11 @@
 
         @media screen and (max-width:600px) {
             font-size: 1.2rem;
-            width:100%;
+            width:80%;
+            flex: initial;
+            order: 0;
+            display: flex;
+            justify-content: start;
         }
     }
 }

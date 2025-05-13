@@ -9,7 +9,12 @@
             width: 240px !important;
             top: $header-height !important;
             background-color: #004B9C !important;
-            height: calc(100% - $header-height) !important
+            height: calc(100% - $header-height) !important;
+
+            @media screen and (max-width: 600px) {
+                top: $header-mobile-height !important;
+                height: calc(100% - $header-mobile-height) !important;
+            }
         }
     }
 

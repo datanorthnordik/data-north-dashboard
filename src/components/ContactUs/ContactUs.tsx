@@ -22,8 +22,14 @@ const ContactUs = (props: ContactUsProps) => {
                         <span className="contactus_contact_details">
                             Contact:
                         </span>
-                        <span className="contactus_contact_details">
+                        <span className="contactus_contact_details contactus_contact_person">
                             {`${contact.name}, ${contact.designation}`}
+                        </span>
+                        <span className="contactus_contact_details contactus_contact_address">
+                            {`${contact.address}`}
+                        </span>
+                        <span className="contactus_contact_details contactus_contact_street">
+                            {`${contact.street}`}
                         </span>
                         <span className="contactus_contact_details contactus_contact_mobile">
                             {`T:${contact.telephone}`}

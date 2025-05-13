@@ -14,6 +14,11 @@
     @media screen and (max-width: 900px) {
         flex-direction: column;
     }
+
+    @media screen and (max-width: 600px) {
+        margin-top: $header-mobile-height  
+    }
+    
     &_desc{
         flex:1;
         &_heading{

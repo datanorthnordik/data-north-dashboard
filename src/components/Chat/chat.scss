@@ -8,6 +8,11 @@
     margin-top: $header-height;
     height: calc(100vh - $header-height - 100px);
     overflow: hidden;
+
+    @media screen and (max-width: 600px) {
+        margin-top: $header-mobile-height;
+        height: calc(100vh - $header-mobile-height - 100px);
+    }
     
     &_wrapper{
         box-sizing: border-box;

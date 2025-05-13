@@ -14,6 +14,10 @@
     @media screen and (max-width: 900px) {
        flex-direction: column;
     }
+
+    @media screen and (max-width: 600px) {
+        margin-top: $header-mobile-height;
+    }
     &_contact{
         flex: 1;
         padding: 10px 11% 10px 10px;
@@ -40,6 +44,7 @@
 
         &_email{
             color: $secondary-color;
+            cursor: pointer;
             &:hover{
                 color: $primary_color
             }
@@ -47,11 +52,19 @@
                 font-weight: 700;
             }
         }
+    
+        &_address{
+            margin-bottom: 0rem;
+        }
 
         &_mobile{
             &::first-letter{
                 font-weight: 700;
             }
+        }
+
+        &_person{
+            text-align: left;
         }
     }
 
