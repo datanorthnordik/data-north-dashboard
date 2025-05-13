@@ -1,0 +1,60 @@
+@import "../../scss/variables.scss";
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.aboutus{
+    margin-top: $header-height;
+    font-family: "adobe-caslon-pro";
+    padding: 0 10%;
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+    }
+    &_desc{
+        flex:1;
+        &_heading{
+            font-size: 1.8rem;
+            color: $primary_color;
+            font-weight: 400;
+        }
+
+        &_para{
+            line-height: 1.8;
+            letter-spacing: 0px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        &_goals{
+            
+        }
+    }
+
+    &_goal{
+        &_item{
+           list-style-type: none; 
+           line-height: 1.4;
+           text-align: justify;
+           margin-bottom: .5rem;
+           display: flex;
+           align-items: flex-start;
+           &_icon{
+             color: $secondary-color;
+             margin-right: .5rem;
+           }
+        }
+
+        &_list{
+            padding: 0;
+        }
+    }
+
+    &_logo{
+        flex: 1
+    }
+}

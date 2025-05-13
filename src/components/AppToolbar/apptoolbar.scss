@@ -2,7 +2,7 @@
 
 .apptoolbar {
     background-color: $color_white !important;
-    max-height: 4rem !important;
+    max-height: $header-height !important;
     display: flex !important;
     justify-content: center !important;
 }

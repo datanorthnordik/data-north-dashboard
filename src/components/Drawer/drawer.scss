@@ -7,9 +7,9 @@
         & .MuiDrawer-paper {
             box-sizing: border-box !important;
             width: 240px !important;
-            top: 4rem !important;
+            top: $header-height !important;
             background-color: #004B9C !important;
-            height: calc(100% - 4rem) !important
+            height: calc(100% - $header-height) !important
         }
     }
 
@@ -65,5 +65,9 @@
                 margin-left: 10px
             }
         }
+    }
+
+    &_divider{
+        background-color: white !important;
     }
 }

@@ -1,35 +1,129 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, useNavigate } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import Chat from './components/Chat/Chat';
+import DataAck from './components/DataAck/DataAck';
+import ContactUs from './components/ContactUs/ContactUs';
+import AboutUs from './components/AboutUs/AboutUs';
+import DashboardDrawer from './components/Drawer/Drawer';
+import { Theme, useMediaQuery } from '@mui/material';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import MapIcon from  "@mui/icons-material/Map"
+import { getDashBoard } from './services/dashboard';
+import { BinocularsIcon } from './utils/Binocular';
 
 
 function App() {
-  useEffect(() => {
-    document.body.addEventListener('touchstart', function (e) {
-      console.log('touchstart', e);
-    }, { passive: true });
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    document.body.addEventListener('touchmove', function (e) {
-      console.log('touchmove', e);
-    }, { passive: true });
+  const [navItems, setNavItems] = useState([])
+  const navigate = useNavigate()
+  const [dashboards, setDashBoards] = React.useState<any>([])
+  const drawerOpen = mobileOpen
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
 
-    document.body.addEventListener('touchend', function (e) {
-      console.log('touchend', e);
-    }, { passive: true });
+  const icons: any = {
+    'Demographics': <Diversity3Icon />,
+    'Health': <HealthAndSafetyIcon />,
+    'Economics': <MonetizationOnIcon />,
+    'Soo View': <BinocularsIcon/>,
+    'Northern Ontario': <MapIcon/>
+}
 
-  }, [])
+  const handleOpen = (event: any, index: number) => {
+    event.stopPropagation();
+    const newNavItems: any = [...navItems]
+    newNavItems[index].open = !newNavItems[index].open
+    setNavItems(newNavItems)
+  }
+
+  const headerNavItems = [
+    {"Heading": "", items:[{"title": "About Us", icon: <AccountCircleIcon/>, onClick: ()=>{navigate("/about-us")}}]}
+]
+
+const footerNavItems = [
+    {"Heading": "", items:[{"title": "Data Acknowledgement", icon: <CheckCircleIcon/>, onClick: ()=>{navigate("/data-ack")}}]},
+    {"Heading": "", items:[{"title": "Contact Us", icon: <ContactMailIcon/>, onClick: ()=>{navigate("/contact-us")}}]}
+]
+
+  const [selectedCategory, setSelectedCategory] = useState<any>(navItems[0])
+  
   const theme = createTheme();
+
+  useEffect(() => {
+    if (dashboards.length > 0) {
+        const navMap: any = {}
+        dashboards.forEach((item: any) => {
+            if (navMap[item.type]) {
+                if (navMap[item.type][item.title]) {
+                    navMap[item.type][item.title].push(item)
+                } else {
+                    navMap[item.type][item.title] = [item]
+                }
+            } else {
+                navMap[item.type] = { [item.title]: [item] }
+            }
+
+        })
+        const newNavItems: any = []
+        Object.entries(navMap).forEach(([title, dashboardList]: any) => {
+            const boardlist: any = []
+            Object.entries(dashboardList).forEach(([category, boards]) => {
+                boardlist.push({ title: category, type: `${title}_${category}`, icon: icons[category], "dashboards": boards })
+            })
+            newNavItems.push({ title, icon: icons[title], "dashboards": boardlist, open: false })
+        });
+
+        console.log(newNavItems)
+        newNavItems[0]["open"] = true
+        setNavItems(newNavItems)
+        setSelectedCategory(newNavItems[0].dashboards[0])
+    }
+
+  }, [dashboards])
+
+  useEffect(() => {
+    getDashBoardList()
+}, [])
+
+const getDashBoardList = async () => {
+    try {
+        const result: any = await getDashBoard()
+        setDashBoards(result.data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+  
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      {drawerOpen && <DashboardDrawer
+        handleOpen={handleOpen}
+        handleDrawerToggle={handleDrawerToggle}
+        mobileOpen={mobileOpen}
+        navItems={navItems}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        headerNavItems={headerNavItems}
+        footerNavItems={footerNavItems}
+      />
+      }
         <Routes>
-          <Route path="/chat" element={<Chat/>} />
-          <Route path="" element={<Dashboard />} />
+          <Route path="/chat" element={<Chat handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="/data-ack" element={<DataAck handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="/contact-us" element={<ContactUs handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="/about-us" element={<AboutUs handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="" element={<Dashboard selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
         </Routes>
-      </Router>
     </ThemeProvider>
   );
 }

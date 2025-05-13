@@ -1,0 +1,61 @@
+@import "../../scss/variables.scss";
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.contactus{
+    margin-top: $header-height;
+    font-family: "adobe-caslon-pro";
+    padding: 0 10%;
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 900px) {
+       flex-direction: column;
+    }
+    &_contact{
+        flex: 1;
+        padding: 10px 11% 10px 10px;
+        &_header{
+            font-size: 1.8rem;
+            color: $primary_color;
+            font-weight: 400;
+        }
+
+        &_desc{
+            line-height: 1.8;
+            letter-spacing: 0px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        &_details{
+            display: block;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        &_email{
+            color: $secondary-color;
+            &:hover{
+                color: $primary_color
+            }
+            &::first-letter{
+                font-weight: 700;
+            }
+        }
+
+        &_mobile{
+            &::first-letter{
+                font-weight: 700;
+            }
+        }
+    }
+
+    &_subscribe{
+        flex: 1
+    }
+}

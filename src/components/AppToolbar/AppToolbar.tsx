@@ -7,7 +7,7 @@ import "./apptoolbar.scss"
 
 interface AppToolbarProps {
     handleDrawerToggle?: () => void
-    hideIcon: boolean
+    hideIcon?: boolean
 }
 
 const AppToolbar = (props: AppToolbarProps) => {

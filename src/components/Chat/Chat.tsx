@@ -8,10 +8,11 @@ import { triggerGemini } from "../../services/dashboard"
 import { Backdrop, CircularProgress } from "@mui/material"
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import "./chat.scss"
+import LoadingRobot from "../../utils/Loader";
 
 
 interface ChatProps {
-
+    handleDrawerToggle?: () => void
 }
 
 const Chat = (props: ChatProps) => {
@@ -21,7 +22,7 @@ const Chat = (props: ChatProps) => {
     const [isLoading, setIsLoading] = useState(false)
     const lastQuestionRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
-
+    const {handleDrawerToggle} = props
 
 
     const handleChange = (event: any) => {
@@ -68,14 +69,10 @@ const Chat = (props: ChatProps) => {
                 sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
                 open={isLoading}
             >
-                <CircularProgress color="inherit" />
+                <LoadingRobot/>
             </Backdrop>}
-            <AppToolbar hideIcon={true} />
+            <AppToolbar handleDrawerToggle={handleDrawerToggle} />
             <div className="chat" style={{ position: 'relative' }}>
-                <div className="chat_to_dashboard" onClick={() => navigate("/")}>
-                    <KeyboardBackspaceRoundedIcon />
-                    dashboard
-                </div>
                 <div className="chat_wrapper" ref={containerRef}>
                     {qnsList.map((qns, index) => (
                         <div className="chat_item" ref={index === qnsList.length - 1 ? lastQuestionRef : null}>
