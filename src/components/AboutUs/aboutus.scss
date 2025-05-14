@@ -77,6 +77,15 @@
                 height: 100%;
                 background-color: $secondary-color;
                 z-index: 0;
+
+                @media screen and (max-width: 900px) {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 900px) {
+                padding: 2% 0%;
+                margin-left: 0px;
             }
         }
 
