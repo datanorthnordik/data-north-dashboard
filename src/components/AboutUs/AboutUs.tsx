@@ -31,18 +31,22 @@ const AboutUs = (props: AboutUsProps) => {
                         <div className="aboutus_desc_goals">
                             <h2 className="aboutus_desc_heading">Goals and Objectives</h2>
                             <ul className="aboutus_goal_list">
-                                {goals.map(goal=>(
+                                {goals.map(goal => (
                                     <li className="aboutus_goal_item">
-                                    <span className="aboutus_goal_item_icon">
-                                        <ArrowRightAltIcon/>
-                                    </span>
-                                    {goal}
-                                </li>
+                                        <span className="aboutus_goal_item_icon">
+                                            <ArrowRightAltIcon />
+                                        </span>
+                                        {goal}
+                                    </li>
                                 ))}
                             </ul>
                         </div>
                     </div>
                     <div className="aboutus_logo">
+                        <div className="aboutus_logo_wrapper">
+                            <img className='aboutus_logo_image'
+                                decoding="async" width="1067" height="800" src="https://nordikinstitute.com/wp-content/uploads/2021/04/Algoma_University_2.jpg" alt="Algoma University Campus Building" srcSet="https://nordikinstitute.com/wp-content/uploads/2021/04/Algoma_University_2.jpg 1067w, https://nordikinstitute.com/wp-content/uploads/2021/04/Algoma_University_2-640x480.jpg 640w, https://nordikinstitute.com/wp-content/uploads/2021/04/Algoma_University_2-768x576.jpg 768w" sizes="(max-width: 1067px) 100vw, 1067px" />
+                        </div>
                     </div>
                 </div>
             </div>

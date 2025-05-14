@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMediaQuery, Theme } from '@mui/material';
 import DashboardDrawer from '../Drawer/Drawer';
 import AppToolbar from '../AppToolbar/AppToolbar';
@@ -20,6 +20,12 @@ export default function Dashboard(props: DashboardProps) {
 
     const {handleDrawerToggle,selectedCategory} = props
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!selectedCategory.dashboards){
+            navigate("/")
+        }
+    }, [selectedCategory])
     
     return (
         <div className='dashboard'>
