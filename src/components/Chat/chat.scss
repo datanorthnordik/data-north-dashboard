@@ -22,6 +22,7 @@
         overflow-y: auto;
         padding-left: 15%;
         padding-right: 15%;
+        margin-bottom: 100px;
         @media screen and (max-width: 900px) {
             padding-left: 5%;
             padding-right: 5%;
@@ -66,12 +67,18 @@
             margin-bottom: 10px;
             scroll-margin-top: 0px;
             display: flex;
+            width: 100%;
 
             &_icon{
                 align-self: flex-start;
                 color: $primary_color;
                 margin-top: .7em;
                 margin-left: .7rem;
+                cursor: pointer;
+            }
+
+            &_text{
+                flex:1;
             }
         }
     }
@@ -97,7 +104,7 @@
             outline: none;
             border: 1px solid #ccc;
             padding-left: 30px;
-            padding-right: 20px;
+            padding-right: 45px;
             box-sizing: border-box;
         }
 

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import AppToolbar from "../AppToolbar/AppToolbar"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -11,6 +11,8 @@ import "./chat.scss"
 import LoadingRobot from "../../utils/Loader";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import PauseIcon from '@mui/icons-material/Pause';
+import {marked} from 'marked';
 
 
 interface ChatProps {
@@ -18,7 +20,7 @@ interface ChatProps {
 }
 
 const Chat = (props: ChatProps) => {
-    const { speak, voices } = useSpeechSynthesis();
+    const { speak, voices, cancel, speaking } = useSpeechSynthesis();
     const [question, setQuestion] = useState('')
     const [qnsList, setQnsList] = useState<any[]>([])
     const navigate = useNavigate();
@@ -26,7 +28,21 @@ const Chat = (props: ChatProps) => {
     const lastQuestionRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
     const {handleDrawerToggle} = props
+    const [selectedVoice, setSelectedVoice] = useState<any>(null)
+    const [selectedIndex, setSelectedIndex] = useState<any>(null)
 
+
+    useEffect(()=>{
+        if(!speaking){
+            setSelectedIndex(null)
+        }
+    },[speaking])
+
+    useEffect(()=>{
+        if(voices.length > 0){
+            setSelectedVoice(voices[2])
+        }
+    }, [voices])
 
     const handleChange = (event: any) => {
         setQuestion(event.target.value);
@@ -66,6 +82,15 @@ const Chat = (props: ChatProps) => {
         }
 
     }
+
+    const handleAudio = async (answer:any, index: number) =>{
+        if(!speaking){
+            const text = await marked(answer)
+            speak({text, voice: selectedVoice})
+            setSelectedIndex(index)
+        } 
+    }
+    
     return (
         <>
             {isLoading && <Backdrop
@@ -83,7 +108,7 @@ const Chat = (props: ChatProps) => {
                                 {qns.question}
                             </div>
                             <div className="chat_item_answer">
-                                <div>
+                                <div className="chat_item_answer_text">
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
                                         rehypePlugins={[rehypeHighlight]}
@@ -91,7 +116,8 @@ const Chat = (props: ChatProps) => {
                                         {qns.answer}
                                     </ReactMarkdown>
                                 </div>
-                                <VolumeUpIcon className="chat_item_answer_icon" onClick={()=> speak({text: qns.answer})}/>
+                                {selectedIndex == index ?  <PauseIcon className="chat_item_answer_icon" onClick={()=> cancel()}/> :
+                                <VolumeUpIcon className="chat_item_answer_icon" onClick={()=> handleAudio(qns.answer,index)}/>}
                             </div>
                         </div>))}
                 </div>

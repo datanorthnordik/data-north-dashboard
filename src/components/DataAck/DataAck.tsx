@@ -1,3 +1,4 @@
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AppToolbar from "../AppToolbar/AppToolbar"
 import "./dataack.scss"
 import { contact, datasources } from "../../constants/constants"
@@ -19,7 +20,7 @@ const DataAck = (props: DataAckProps) => {
                         <p className="dataack_sources_desc">The data for this project were obtained from the following sources.</p>
                         {datasources.map(source => (<div className="dataack_sources_item">
                             <h3 className="dataack_sources_item_heading">{source.source}</h3>
-                            <p>{source.desc}</p>
+                            <p className="dataack_sources_item_para"><ArrowRightAltIcon className="dataack_sources_item_icon"/>{source.desc}</p>
                         </div>))}
                     </div>
                     <div className="dataack_subscribe">

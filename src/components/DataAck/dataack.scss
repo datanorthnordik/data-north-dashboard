@@ -41,6 +41,16 @@
                 color: $secondary-color;
                 font-weight: 400;
             }
+
+            &_para{
+                display: flex;
+                align-items: center;
+            }
+
+            &_icon{
+                color: $secondary-color;
+                margin-right: .5rem;
+            }
         }
     }
 
