@@ -20,12 +20,6 @@ export default function Dashboard(props: DashboardProps) {
 
     const {handleDrawerToggle,selectedCategory} = props
     const navigate = useNavigate()
-
-    useEffect(()=>{
-        if(!selectedCategory.dashboards){
-            navigate("/")
-        }
-    }, [selectedCategory])
     
     return (
         <div className='dashboard'>
@@ -39,9 +33,6 @@ export default function Dashboard(props: DashboardProps) {
                         ))}
                     </div>
                 </div>
-            </div>
-            <div className='dashboard_chat' title="Ask analyst" onClick={() => { navigate("/chat") }}>
-                <img src="NIA ICON.png" className='dashboard_chat_icon' />
             </div>
         </div>
     );

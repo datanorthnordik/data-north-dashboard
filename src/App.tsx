@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import './App.css';
+import './App.scss';
 import Dashboard from './components/Dashboard/Dashboard';
-import { Route, BrowserRouter as Router, Routes, useNavigate } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, useLocation, useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
@@ -21,7 +21,7 @@ import { BinocularsIcon } from './utils/Binocular';
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const location = useLocation()
   const [navItems, setNavItems] = useState([])
   const navigate = useNavigate()
   const [dashboards, setDashBoards] = React.useState<any>([])
@@ -116,12 +116,15 @@ const getDashBoardList = async () => {
       />
       }
         <Routes>
+          <Route path="" element={<AboutUs handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/chat" element={<Chat handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/data-ack" element={<DataAck handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/contact-us" element={<ContactUs handleDrawerToggle={handleDrawerToggle} />} />
-          <Route path="" element={<AboutUs handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/dashboard" element={<Dashboard selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
         </Routes>
+        <div style={{"display": location.pathname == "/chat" ? "none": "flex"}} className='dashboard_chat' title="Ask analyst" onClick={() => { navigate("/chat") }}>
+                <img src="NIA ICON.png" className='dashboard_chat_icon' />
+        </div>
     </ThemeProvider>
   );
 }

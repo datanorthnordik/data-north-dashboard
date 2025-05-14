@@ -65,6 +65,14 @@
             font-size: 1rem;
             margin-bottom: 10px;
             scroll-margin-top: 0px;
+            display: flex;
+
+            &_icon{
+                align-self: flex-start;
+                color: $primary_color;
+                margin-top: .7em;
+                margin-left: .7rem;
+            }
         }
     }
 
@@ -89,7 +97,17 @@
             outline: none;
             border: 1px solid #ccc;
             padding-left: 30px;
+            padding-right: 20px;
             box-sizing: border-box;
+        }
+
+        &_icon{
+            position: absolute;
+            top:50%;
+            right: 20px;
+            transform: translate(0%, -50%);
+            color: $primary_color;
+            cursor: pointer;
         }
     }
 }

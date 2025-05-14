@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import "./apptoolbar.scss"
+import { useNavigate } from "react-router-dom";
 
 interface AppToolbarProps {
     handleDrawerToggle?: () => void
@@ -12,6 +13,7 @@ interface AppToolbarProps {
 
 const AppToolbar = (props: AppToolbarProps) => {
     const { handleDrawerToggle, hideIcon } = props
+    const navigate = useNavigate()
     return (
         <AppBar className="apptoolbar" component="nav">
             <Toolbar className='toolbar'>
@@ -34,7 +36,7 @@ const AppToolbar = (props: AppToolbarProps) => {
                     https://nordikinstitute.com/wp-content/uploads/2020/04/NordikFinalLogo.png 1656w"
                     sizes="(max-width: 1280px) 100vw, 1280px"></img>
                 
-                <h1 className="toolbar_heading">
+                <h1 className="toolbar_heading" onClick={()=> navigate("/")}>
                     DATA NORTH
                 </h1>
 

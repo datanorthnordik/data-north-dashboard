@@ -6,9 +6,11 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { triggerGemini } from "../../services/dashboard"
 import { Backdrop, CircularProgress } from "@mui/material"
-import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
+import SendIcon from '@mui/icons-material/Send';
 import "./chat.scss"
 import LoadingRobot from "../../utils/Loader";
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 
 interface ChatProps {
@@ -16,6 +18,7 @@ interface ChatProps {
 }
 
 const Chat = (props: ChatProps) => {
+    const { speak, voices } = useSpeechSynthesis();
     const [question, setQuestion] = useState('')
     const [qnsList, setQnsList] = useState<any[]>([])
     const navigate = useNavigate();
@@ -80,17 +83,21 @@ const Chat = (props: ChatProps) => {
                                 {qns.question}
                             </div>
                             <div className="chat_item_answer">
-                                <ReactMarkdown
-                                    remarkPlugins={[remarkGfm]}
-                                    rehypePlugins={[rehypeHighlight]}
-                                >
-                                    {qns.answer}
-                                </ReactMarkdown>
+                                <div>
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkGfm]}
+                                        rehypePlugins={[rehypeHighlight]}
+                                    >
+                                        {qns.answer}
+                                    </ReactMarkdown>
+                                </div>
+                                <VolumeUpIcon className="chat_item_answer_icon" onClick={()=> speak({text: qns.answer})}/>
                             </div>
                         </div>))}
                 </div>
                 <div className="chat_input">
-                    <input placeholder="ask me anything"
+                    <SendIcon onClick={handleSubmit} className="chat_input_icon"/>
+                    <input placeholder="Ask me anything..."
                         value={question}
                         onKeyDown={(event) => askGemini(event)}
                         onChange={(event) => handleChange(event)}

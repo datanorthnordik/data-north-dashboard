@@ -33,38 +33,4 @@
       display: flex;
       position: relative;
     }
-
-    &_chat{
-      z-index: 10000;
-      position: fixed;
-      bottom: 5%;
-      right: 3%;
-      cursor: pointer;
-      background-color: rgba(200, 200, 200, 0.2);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      height: 80px;
-      width: 80px;
-      border-radius: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @media screen and (max-width: 900px) {
-        height: 100px;
-        width: 100px;
-      }
-
-      &_icon{
-        color: $secondary_color;
-        height: 70px;
-        width:70px;
-        border-radius: 50px;
-      }
-
-      &_text{
-        color: $secondary_color;
-        font-weight: 700;
-        font-size: 25px;
-      }
-    }
 }
