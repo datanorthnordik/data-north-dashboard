@@ -12,14 +12,23 @@ import { BinocularsIcon } from '../../utils/Binocular';
 interface DashboardProps {
     handleDrawerToggle: ()=>void
     selectedCategory: any
+    navItems: any
+    setSelectedCategory: (category:any)=> void
 }
 
 
 
 export default function Dashboard(props: DashboardProps) {
 
-    const {handleDrawerToggle,selectedCategory} = props
+    const {handleDrawerToggle,selectedCategory, navItems, setSelectedCategory} = props
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!selectedCategory?.dashboards && navItems?.length>0){
+            setSelectedCategory(navItems[0]?.dashboards[0])
+        }
+
+    },[selectedCategory, navItems])
     
     return (
         <div className='dashboard'>

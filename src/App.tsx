@@ -120,7 +120,7 @@ const getDashBoardList = async () => {
           <Route path="/chat" element={<Chat handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/data-ack" element={<DataAck handleDrawerToggle={handleDrawerToggle} />} />
           <Route path="/contact-us" element={<ContactUs handleDrawerToggle={handleDrawerToggle} />} />
-          <Route path="/dashboard" element={<Dashboard selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
+          <Route path="/dashboard" element={<Dashboard navItems={navItems} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} handleDrawerToggle={handleDrawerToggle} />} />
         </Routes>
         <div style={{"display": location.pathname == "/chat" ? "none": "flex"}} className='dashboard_chat' title="Ask analyst" onClick={() => { navigate("/chat") }}>
                 <img src="NIA ICON.png" className='dashboard_chat_icon' />
