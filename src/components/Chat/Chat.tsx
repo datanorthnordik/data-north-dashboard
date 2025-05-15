@@ -85,7 +85,8 @@ const Chat = (props: ChatProps) => {
 
     const handleAudio = async (answer:any, index: number) =>{
         if(!speaking){
-            const text = await marked(answer)
+            const htmlText = await marked(answer)
+            const text = htmlText.replace(/<[^>]+>/g, '');
             speak({text, voice: selectedVoice})
             setSelectedIndex(index)
         } 
