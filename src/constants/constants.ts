@@ -19,4 +19,5 @@ export const datasources = [
     {source: "Sault Ste. Marie City Website", desc: "Local plans, demographics, and community indicators."},
     {source: "Statistics Canada", desc: "National census and public health statistics."},
     {source: "Analyst Platform – Ontario Government", desc: "Labour market and economic data tool for regional insights."},
+    {source: "Rural Ontarion Institute Platform", desc: "Health related data"},
 ]
