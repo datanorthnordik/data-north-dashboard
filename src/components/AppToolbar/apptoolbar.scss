@@ -18,6 +18,12 @@
     }
     &_icon{
         color: $primary_color !important;
+        @media screen and (max-width: 600px) {
+            order:2;
+            width: 50%;
+            display: flex !important;
+            justify-content: flex-start !important;
+        }
     }
 
     &_brand{
@@ -29,7 +35,8 @@
         @media screen and (max-width:600px) {
             max-width: 25%;
             max-height: 2rem;
-            order:1
+            order:1;
+            padding-top: 10px;
         }
 
         max-height: 3rem;
@@ -66,11 +73,12 @@
 
         @media screen and (max-width:600px) {
             font-size: 1.2rem;
-            width:80%;
+            width:48%;
             flex: initial;
-            order: 0;
+            order: 3;
             display: flex;
             justify-content: start;
+            margin-left: -19%;
         }
     }
 }
