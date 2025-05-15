@@ -13,6 +13,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import PauseIcon from '@mui/icons-material/Pause';
 import {marked} from 'marked';
+import { decode } from 'he';
 
 
 interface ChatProps {
@@ -85,7 +86,8 @@ const Chat = (props: ChatProps) => {
 
     const handleAudio = async (answer:any, index: number) =>{
         if(!speaking){
-            const htmlText = await marked(answer)
+            let htmlText = await marked(answer)
+            htmlText = decode(htmlText)
             const text = htmlText.replace(/<[^>]+>/g, '');
             speak({text, voice: selectedVoice})
             setSelectedIndex(index)
